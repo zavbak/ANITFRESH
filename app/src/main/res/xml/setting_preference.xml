@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/pref_excange_category_title">
+        <EditTextPreference
+            android:key     ="@string/pref_exchange_host_key"
+            android:summary ="@string/pref_exchange_host_summary"
+            android:title   ="@string/pref_exchange_host_title">
+        </EditTextPreference>
+
+        <EditTextPreference
+            android:key     ="@string/pref_exchange_user_key"
+            android:summary ="@string/pref_exchange_user_summary"
+            android:title   ="@string/pref_exchange_user_title">
+        </EditTextPreference>
+
+        <EditTextPreference
+            android:key     ="@string/pref_exchange_pass_key"
+            android:summary ="@string/pref_exchange_pass_summary"
+            android:title   ="@string/pref_exchange_pass_title"
+            android:inputType ="textPassword"
+            >
+
+        </EditTextPreference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

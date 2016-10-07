@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">ANIT FRESH</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+
+
+
+
+    <string name="pref_excange_category_title">Обмен</string>
+    <string name="pref_exchange_host_key">pref_host_key</string>
+    <string name="pref_exchange_host_summary">Введите IP адрес или url</string>
+    <string name="pref_exchange_host_title">Адрес</string>
+    <string name="pref_exchange_user_key">pref_user_in_back_key</string>
+    <string name="pref_exchange_user_summary">Имя пользователя</string>
+    <string name="pref_exchange_user_title">Пользователь</string>
+    <string name="pref_exchange_pass_key">pref_pass_in_back_key</string>
+    <string name="pref_exchange_pass_summary">Пароль в программе</string>
+    <string name="pref_exchange_pass_title">Пароль</string>
+    <string name="pref_guid_user">guid_user</string>
+</resources>
