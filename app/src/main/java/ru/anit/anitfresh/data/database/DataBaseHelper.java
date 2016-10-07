@@ -39,6 +39,7 @@ public class DataBaseHelper {
         db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(tableName, projection, selection, selectionArgs, null, null, sortOrder);
         return cursor;
+
     }
 
     /**
