@@ -17,7 +17,7 @@ public class InteratorSynhronizerNotNotifi implements IInterator {
     public boolean execute() {
 
         Intent intent = new Intent(App.getContext(), ServisExchangeKsoap.class);
-        App.getContext().startService(intent);
+        App.getContext().startService(intent.putExtra(ServisExchangeKsoap.START_WITH_NOTIFI, true));
 
         return true;
     }
