@@ -27,9 +27,14 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Настройки" />
             <item
-                android:id="@+id/nav_nitification"
+                android:id="@+id/nav_test_reg1c"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Уведомление" />
+                android:title="Регистрация 1С" />
+            <item
+                android:id="@+id/nav_test_crash"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Тест крэш" />
+
         </menu>
     </item>
 

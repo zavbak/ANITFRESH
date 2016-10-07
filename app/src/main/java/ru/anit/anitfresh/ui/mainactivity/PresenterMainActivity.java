@@ -2,6 +2,9 @@ package ru.anit.anitfresh.ui.mainactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.google.firebase.crash.FirebaseCrash;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -13,6 +16,7 @@ import ru.anit.anitfresh.Interators.synchronizer.InteratorSynhronizerNotNotifi;
 import ru.anit.anitfresh.R;
 import ru.anit.anitfresh.databus.EventBusMessageOnError;
 import ru.anit.anitfresh.databus.EventBusMessageOnInform;
+import ru.anit.anitfresh.general.general.LogHelper;
 import ru.anit.anitfresh.ui.page.catalogs.PageCatalogContractors;
 import ru.anit.anitfresh.ui.page.catalogs.PageCatalogUsers;
 import ru.anit.anitfresh.ui.page.tasks.main.PageTasksMain;
@@ -113,10 +117,15 @@ public class PresenterMainActivity implements IPresenterMainActivity {
 
             view.getActivity().startActivity(new Intent(view.getActivity(), PrefActivity.class));
 
-        }else if (id == R.id.nav_nitification) {
+        }else if (id == R.id.nav_test_reg1c) {
 
             IInterator interator = new InteratorPutToken();
             interator.execute();
+        }else if(id == R.id.nav_test_crash) {
+
+            FirebaseCrash.logcat(Log.DEBUG, LogHelper.LOG_TAG,"Test log");
+            FirebaseCrash.report(new Exception("Test Error"));
+
         }
 
     }

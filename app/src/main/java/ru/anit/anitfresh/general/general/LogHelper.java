@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class LogHelper {
 
-    private static String LOG_TAG = "anit";
+    public static String LOG_TAG = "anit";
 
     public static void d(String message){
         Log.d(LOG_TAG,message);
