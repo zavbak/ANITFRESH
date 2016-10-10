@@ -21,6 +21,7 @@ import ru.anit.anitfresh.ui.page.catalogs.PageCatalogContractors;
 import ru.anit.anitfresh.ui.page.catalogs.PageCatalogUsers;
 import ru.anit.anitfresh.ui.page.tasks.main.PageTasksMain;
 import ru.anit.anitfresh.ui.settingactivity.PrefActivity;
+import ru.anit.anitfresh.ui.taskactivity.TaskActivity;
 
 
 /**
@@ -126,6 +127,8 @@ public class PresenterMainActivity implements IPresenterMainActivity {
             FirebaseCrash.logcat(Log.DEBUG, LogHelper.LOG_TAG,"Test log");
             FirebaseCrash.report(new Exception("Test Error"));
 
+        }else if(id == R.id.nav_test_task){
+            view.getActivity().startActivity(new Intent(view.getActivity(), TaskActivity.class));
         }
 
     }

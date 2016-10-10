@@ -31,9 +31,8 @@ public class ServisExchangeKsoap extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Boolean notifi = intent.getBooleanExtra(START_WITH_NOTIFI, false);
-
         try {
+            Boolean notifi = intent.getBooleanExtra(START_WITH_NOTIFI, false);
 
             MyRun mr = new MyRun(notifi);
             executorService.execute(mr);

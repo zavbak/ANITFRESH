@@ -27,13 +27,17 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Настройки" />
             <item
+                android:id="@+id/nav_test_task"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Задача тест" />
+            <item
                 android:id="@+id/nav_test_reg1c"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Регистрация 1С" />
+                android:title="Регистрация 1С тест" />
             <item
                 android:id="@+id/nav_test_crash"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Тест крэш" />
+                android:title="Тест крэш тест" />
 
         </menu>
     </item>

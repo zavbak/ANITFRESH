@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.anit.anitfresh.Interators.puttoken.InteratorPutToken;
 import ru.anit.anitfresh.Interators.synchronizer.exeptionsynchronize.ExeptionParseJson;
 import ru.anit.anitfresh.Interators.synchronizer.exeptionsynchronize.ExeptionReceivedData;
 import ru.anit.anitfresh.Interators.synchronizer.exeptionsynchronize.ExeptionSaveDate;
@@ -61,6 +62,10 @@ public class SynchronizerHelper {
      * start synchronizer
      */
     public static void start(Boolean notyfi) {
+
+        // Отправим токенг
+        new InteratorPutToken().execute();
+
         Boolean repeat = true;
         List<MetaObject> listNotify = new ArrayList<>();
 
