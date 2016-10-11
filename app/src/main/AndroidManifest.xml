@@ -43,7 +43,7 @@
             android:authorities="ru.anit.anit.provider" />
 
         <activity android:name=".ui.settingactivity.PrefActivity" />
-        <activity android:name=".ui.taskactivity.TaskActivity"></activity>
+
     </application>
 
 </manifest>

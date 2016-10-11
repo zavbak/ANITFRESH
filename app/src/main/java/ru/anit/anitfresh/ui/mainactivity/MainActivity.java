@@ -19,6 +19,7 @@ import java.util.List;
 import ru.anit.anitfresh.R;
 
 
+import ru.anit.anitfresh.ui.dialog.taskdialog.FragmentDialogTask;
 import ru.anit.anitfresh.ui.page.general.Page;
 import ru.anit.anitfresh.ui.page.tasks.lists.FragmentTasksListAbs;
 
@@ -117,6 +118,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public Activity getActivity() {
         return this;
+    }
+
+    @Override
+    public void startNewTask() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        FragmentDialogTask dialog = FragmentDialogTask.getDialogTask(null);
+        dialog.show(ft, "tag_dialog_new_task");
     }
 
 

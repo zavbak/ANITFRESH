@@ -19,4 +19,6 @@ public class User extends Catalog {
     public void addRefs(HashSet<String> hashSetStr) {
 
     }
+
+
 }

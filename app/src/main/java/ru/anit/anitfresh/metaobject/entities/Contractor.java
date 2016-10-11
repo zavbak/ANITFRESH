@@ -17,6 +17,7 @@ public class Contractor extends Catalog {
     public void addRefs(HashSet<String> hashSetStr) {
 
     }
+
 }
 
 

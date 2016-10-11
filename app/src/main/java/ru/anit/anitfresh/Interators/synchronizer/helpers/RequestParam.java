@@ -15,7 +15,7 @@ public class RequestParam {
 
         int count = 100;
 
-        String COMMAND             = "connand";
+        String COMMAND             = "command";
         String COMMAND_SYNCHRONIZE = "synchronize";
 
         String START_NUMBER    = "start_number";

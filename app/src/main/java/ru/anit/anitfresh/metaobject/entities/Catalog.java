@@ -43,4 +43,18 @@ public abstract class Catalog extends MetaObject {
                 ", code='" + code + '\'' +
                 '}';
     }
+
+    @Override
+    public Boolean filter(String strSearch) {
+        String up_search = strSearch.toUpperCase();
+
+        String up_name  = getName().toUpperCase();
+        if(up_name.contains(up_search)){
+
+            return true;
+
+        }else {
+            return false;
+        }
+    }
 }

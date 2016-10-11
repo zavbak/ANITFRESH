@@ -1,4 +1,4 @@
-package ru.anit.anitfresh.ui.taskactivity;
+package ru.anit.anitfresh.ui.dialog.datafielddialog;
 
 import android.content.Context;
 import android.os.Handler;
@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
  * Created by Александр on 10.10.2016.
  */
 
-public class DelayAutoCompleteTextView extends AutoCompleteTextView {
+public class TextViewDelayAutoComplete extends AutoCompleteTextView {
 
     private static final int MESSAGE_TEXT_CHANGED = 100;
     private static final int DEFAULT_AUTOCOMPLETE_DELAY = 750;
@@ -23,11 +23,11 @@ public class DelayAutoCompleteTextView extends AutoCompleteTextView {
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            DelayAutoCompleteTextView.super.performFiltering((CharSequence) msg.obj, msg.arg1);
+            TextViewDelayAutoComplete.super.performFiltering((CharSequence) msg.obj, msg.arg1);
         }
     };
 
-    public DelayAutoCompleteTextView(Context context, AttributeSet attrs) {
+    public TextViewDelayAutoComplete(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

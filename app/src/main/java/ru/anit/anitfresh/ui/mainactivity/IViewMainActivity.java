@@ -15,6 +15,8 @@ public interface IViewMainActivity extends IView {
     void setPage(Page page);
     void changeTitle(String str);
     Activity getActivity();
+    void startNewTask();
+
 
 
 }

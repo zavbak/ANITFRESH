@@ -8,6 +8,10 @@ import org.json.JSONObject;
 public abstract class Document extends MetaObject {
 
 
+    public Document(TYPE_ENTITIES type) {
+        super(type);
+    }
+
     protected Document(String guid, TYPE_ENTITIES type, JSONObject jsonObject) {
         super(guid, type);
     }
