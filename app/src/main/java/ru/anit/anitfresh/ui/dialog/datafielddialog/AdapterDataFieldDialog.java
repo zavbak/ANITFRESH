@@ -16,7 +16,7 @@ import ru.anit.anitfresh.R;
 
 
 /**
- * Created by Александр on 10.10.2016.
+ * Created by Александр on 10.10.2016.777
  */
 
 public class AdapterDataFieldDialog extends BaseAdapter implements Filterable {

@@ -37,7 +37,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by Александр on 12.10.2016.
+ * Created by Александр on 12.10.2016.11
  */
 
 public class FragmentDialogField extends DialogFragment implements IViewFragmentDialogField {
