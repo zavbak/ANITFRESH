@@ -17,6 +17,7 @@ import ru.anit.anitfresh.R;
 import ru.anit.anitfresh.databus.EventBusMessageOnError;
 import ru.anit.anitfresh.databus.EventBusMessageOnInform;
 import ru.anit.anitfresh.general.general.LogHelper;
+import ru.anit.anitfresh.ui.dialog.fielddialog.FragmentDialogField;
 import ru.anit.anitfresh.ui.page.catalogs.PageCatalogContractors;
 import ru.anit.anitfresh.ui.page.catalogs.PageCatalogUsers;
 import ru.anit.anitfresh.ui.page.tasks.main.PageTasksMain;
@@ -126,7 +127,7 @@ public class PresenterMainActivity implements IPresenterMainActivity {
             FirebaseCrash.report(new Exception("Test Error"));
 
         }else if(id == R.id.nav_test_task){
-            
+
         }
 
     }

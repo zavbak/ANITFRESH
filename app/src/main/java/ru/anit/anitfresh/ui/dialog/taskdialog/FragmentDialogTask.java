@@ -28,6 +28,7 @@ import ru.anit.anitfresh.metaobject.helpers.BuilderHelper;
 import ru.anit.anitfresh.ui.dialog.datafielddialog.FragmentDialogChoiseData;
 import ru.anit.anitfresh.ui.dialog.datafielddialog.ICallBackChoiseField;
 import ru.anit.anitfresh.ui.dialog.datafielddialog.IDataChoice;
+import ru.anit.anitfresh.ui.dialog.fielddialog.FragmentDialogField;
 
 
 /**
@@ -164,8 +165,10 @@ public class FragmentDialogTask extends DialogFragment implements IViewFragmentD
             case R.id.etContractor:
 
 
-                FragmentDialogChoiseData dialogContractor = FragmentDialogChoiseData.getDialoCatalog(getListDialog(TYPE_ENTITIES.CONTRACTOR), "Выбрать Ответственного:", selectContractor);
-                dialogContractor.show(fm, "tag_dialog_contractor");
+                FragmentDialogField dialogField = FragmentDialogField.getInstance();
+                dialogField.show(fm, "tag_dialog_contractor");
+                //FragmentDialogChoiseData dialogContractor = FragmentDialogChoiseData.getDialoCatalog(getListDialog(TYPE_ENTITIES.CONTRACTOR), "Выбрать Ответственного:", selectContractor);
+                //dialogContractor.show(fm, "tag_dialog_contractor");
 
                 break;
 
