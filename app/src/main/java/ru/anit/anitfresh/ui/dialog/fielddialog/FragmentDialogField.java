@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -100,6 +103,8 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
                 .subscribe(list -> {
                     showList((List<IDataItem>) list);
                     binding.progressBar.setVisibility(View.GONE);
+
+
                 });
 
     }
@@ -117,16 +122,17 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
 
     }
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_dialog_field, null, false);
+
 
         mRecyclerView = binding.rvList;
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
 
         mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
 
@@ -150,15 +156,6 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
             }
         });
 
-
-        //binding.edSearch.requestFocus();
-        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        //imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-
-
-
-        binding.edSearch.requestFocus();
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         binding.edSearch.addTextChangedListener(new TextWatcher() {
 
@@ -184,6 +181,33 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
 
         redraw();
 
+        binding.edSearch.requestFocus();
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        return binding.getRoot();
+
+
+    }
+
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog =  super.onCreateDialog(savedInstanceState);
+
+       return dialog;
+    }
+
+    //@Override
+    public Dialog onCreateDialog1(Bundle savedInstanceState) {
+
+
+
+        //binding.edSearch.requestFocus();
+        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        //imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+
+
 
 
         return new AlertDialog.Builder(getActivity())
@@ -196,6 +220,7 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
                     }
                 })
                 .create();
+
 
     }
 
