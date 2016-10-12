@@ -181,6 +181,13 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
 
         redraw();
 
+        binding.ivCansel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDialog().cancel();
+            }
+        });
+
         binding.edSearch.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
@@ -198,31 +205,7 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
        return dialog;
     }
 
-    //@Override
-    public Dialog onCreateDialog1(Bundle savedInstanceState) {
 
-
-
-        //binding.edSearch.requestFocus();
-        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        //imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-
-
-
-
-        return new AlertDialog.Builder(getActivity())
-                .setView(binding.getRoot())
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.cancel();
-                    }
-                })
-                .create();
-
-
-    }
 
 
     @Override
@@ -235,5 +218,6 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
     @Override
     public void onSelectionPosition(IDataItem item) {
         Toast.makeText(getActivity(), item.getName(), Toast.LENGTH_SHORT).show();
+        getDialog().cancel();
     }
 }
