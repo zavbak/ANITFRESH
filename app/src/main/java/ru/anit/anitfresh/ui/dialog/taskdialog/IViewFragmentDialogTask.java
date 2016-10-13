@@ -10,5 +10,7 @@ public interface IViewFragmentDialogTask {
 
     void setTextContractor(String text);
     void setTextUser(String text);
+    void setTextKontroler(String text);
+
     void setTask(Task task);
 }

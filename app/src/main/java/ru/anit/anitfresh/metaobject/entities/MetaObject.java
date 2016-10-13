@@ -1,12 +1,12 @@
 package ru.anit.anitfresh.metaobject.entities;
 
-import ru.anit.anitfresh.ui.dialog.datafielddialog.IDataChoice;
+
 import ru.anit.anitfresh.ui.dialog.fielddialog.IDataItem;
 
 /**
  * Created by 79900 on 17.09.2016.
  */
-public abstract class MetaObject implements IAddCashRefs,IDataChoice,IDataItem {
+public abstract class MetaObject implements IAddCashRefs,IDataItem {
 
     String guid;
     TYPE_ENTITIES type;

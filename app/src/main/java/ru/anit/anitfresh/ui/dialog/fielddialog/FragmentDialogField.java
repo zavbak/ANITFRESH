@@ -1,13 +1,8 @@
 package ru.anit.anitfresh.ui.dialog.fielddialog;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,19 +17,10 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.anit.anitfresh.R;
-import ru.anit.anitfresh.application.App;
-import ru.anit.anitfresh.data.database.ObjectSyncTable;
-import ru.anit.anitfresh.data.provider.Provider;
 import ru.anit.anitfresh.databinding.FragmentDialogFieldBinding;
-import ru.anit.anitfresh.metaobject.entities.Catalog;
-import ru.anit.anitfresh.metaobject.entities.TYPE_ENTITIES;
-import ru.anit.anitfresh.metaobject.helpers.BuilderHelper;
-import ru.anit.anitfresh.ui.dialog.datafielddialog.TextViewDelayAutoComplete;
-import ru.anit.anitfresh.ui.page.catalogs.AdapterCatalog;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -45,57 +31,76 @@ import rx.schedulers.Schedulers;
 
 public class FragmentDialogField extends DialogFragment implements IViewFragmentDialogField {
 
-
     FragmentDialogFieldBinding binding;
+
+    /**
+     *  где брать список
+     */
+    IGetListDataItem mGetListDataItem;
+
+    /**
+     *  Что делать со списком
+     */
+    ICallBackSelectItem mCallBackSelectItem;
+
 
     private RecyclerView mRecyclerView;
     private AdapterDataItem mAdapter;
     private LinearLayoutManager mLayoutManager;
 
-    public static FragmentDialogField getInstance() {
+    /**
+     * Bilder
+     *
+     * @param mGetListDataItem
+     * @return
+     */
+    public static FragmentDialogField getInstance(IGetListDataItem mGetListDataItem,ICallBackSelectItem callBackSelectItem) {
         FragmentDialogField dialog = new FragmentDialogField();
+        dialog.setGetListDataItem(mGetListDataItem);
+        dialog.setCallBackSelectItem(callBackSelectItem);
         return dialog;
     }
 
 
-    private List<IDataItem> getList() {
+    public void setCallBackSelectItem(ICallBackSelectItem mCallBackSelectItem) {
+        this.mCallBackSelectItem = mCallBackSelectItem;
+    }
 
-        Cursor cursor = App.getContext().getContentResolver().query(Provider.URI_TABLE_SYNC, null, ObjectSyncTable.FIELD_TYPE + "=?", new String[]{
-                TYPE_ENTITIES.CONTRACTOR.getNameFromBase()}, null);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_dialog_field, null, false);
 
-        List<IDataItem> list = new ArrayList<>();
+        mRecyclerView = binding.rvList;
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
-        if (cursor != null && cursor.moveToFirst())
+        init();
 
-        {
-            do {
+        redraw();
 
-                ObjectSyncTable objectSyncTable = new ObjectSyncTable(cursor);
+        // открываем клавиатуру
+        binding.edSearch.requestFocus();
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-                IDataItem item = (IDataItem) BuilderHelper.getObject(objectSyncTable);
-
-                list.add(item);
-
-
-            } while (cursor.moveToNext());
-        }
-
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        return list;
+        return binding.getRoot();
 
     }
 
+    void setGetListDataItem(IGetListDataItem GetListDataItem) {
+        this.mGetListDataItem = GetListDataItem;
+    }
 
+
+    /**
+     * Получаем данные
+     */
     void redraw() {
-
         binding.progressBar.setVisibility(View.VISIBLE);
-
         Observable
                 .create(subscriber -> {
-                    subscriber.onNext(getList());
+                    subscriber.onNext(mGetListDataItem.getList());
                     subscriber.onCompleted();
                 })
                 .subscribeOn(Schedulers.io())
@@ -103,12 +108,15 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
                 .subscribe(list -> {
                     showList((List<IDataItem>) list);
                     binding.progressBar.setVisibility(View.GONE);
-
-
                 });
-
     }
 
+
+    /**
+     * Выводим список
+     *
+     * @param list
+     */
     private void showList(List<IDataItem> list) {
 
         if (mAdapter == null) {
@@ -122,24 +130,25 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
 
     }
 
-
-    @Nullable
+    /**
+     * Выбор позиции
+     *
+     * @param item
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_dialog_field, null, false);
+    public void onSelectionPosition(IDataItem item) {
+        mCallBackSelectItem.onSelectItem(item);
+        getDialog().cancel();
+    }
 
-
-        mRecyclerView = binding.rvList;
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+    void init() {
 
         mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
 
             @Override
             public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                //Toast.makeText(getActivity(),"onInterceptTouchEvent", Toast.LENGTH_SHORT).show();
 
+                // прячем клавиатуру
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mRecyclerView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 return false;
@@ -147,12 +156,12 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
 
             @Override
             public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-                Toast.makeText(getActivity(),"onTouchEvent", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-                Toast.makeText(getActivity(),"onRequestDisallowInterceptTouchEvent", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -179,8 +188,6 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
             }
         });
 
-        redraw();
-
         binding.ivCansel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,36 +195,8 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
             }
         });
 
-        binding.edSearch.requestFocus();
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-        return binding.getRoot();
-
-
-    }
-
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog =  super.onCreateDialog(savedInstanceState);
-
-       return dialog;
     }
 
 
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
-    }
-
-    @Override
-    public void onSelectionPosition(IDataItem item) {
-        Toast.makeText(getActivity(), item.getName(), Toast.LENGTH_SHORT).show();
-        getDialog().cancel();
-    }
 }

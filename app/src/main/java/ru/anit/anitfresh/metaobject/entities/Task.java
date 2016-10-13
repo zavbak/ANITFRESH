@@ -43,11 +43,13 @@ public class Task extends Document {
         final String TITLE              = "title";
         final String GUID_CONTRACTOR    = "guid_contractor";
         final String GUID_OTVETSTVENNIY = "guid_otvetstvenniy";
+        final String GUID_KONTRALER     = "guid_contraler";
 
         JSONObject taskJ = new JSONObject();
         taskJ.put(TITLE,title);
         taskJ.put(GUID_CONTRACTOR,guidContractor);
         taskJ.put(GUID_OTVETSTVENNIY,guidOtvetstvenniy);
+        taskJ.put(GUID_KONTRALER    ,guidContraler);
 
         return taskJ;
 
@@ -59,6 +61,10 @@ public class Task extends Document {
 
     public void setGuidOtvetstvenniy(String guidOtvetstvenniy) {
         this.guidOtvetstvenniy = guidOtvetstvenniy;
+    }
+
+    public void setGuidContraler(String guidContraler) {
+        this.guidContraler = guidContraler;
     }
 
     public void setGuidContractor(String guidContractor) {
