@@ -93,7 +93,7 @@ public class SettingsSoap {
         this.password = password;
         this.user     = user;
 
-        this.nameBase        = "anit";
+        this.nameBase        = "upp_anit";
         this.operation       = "interchange";
         this.nameWebServises = "wsAnit";
         nameSpace            = "www.URI.799000.ru";
@@ -111,7 +111,7 @@ public class SettingsSoap {
         //host     = "192.168.1.220";
         host     = "192.168.1.220";
 
-        nameBase = "anit";
+        nameBase = "upp_anit";
 
         user     = "Гладких";
 

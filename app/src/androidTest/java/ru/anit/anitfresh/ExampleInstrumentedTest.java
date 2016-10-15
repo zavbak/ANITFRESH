@@ -7,6 +7,9 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ru.anit.anitfresh.Interators.synchronizer.InteratorSynhronizerNotifi;
+import ru.anit.anitfresh.Interators.synchronizer.helpers.SynchronizerHelper;
+
 import static org.junit.Assert.*;
 
 /**
@@ -20,6 +23,9 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
+
+
+        SynchronizerHelper.start(false);
 
         assertEquals("ru.anit.anitfresh", appContext.getPackageName());
     }

@@ -40,19 +40,13 @@ public class ObjectSyncTable implements ITableSync{
     public ObjectSyncTable(JSONObject jsonObject) throws JSONException {
 
         this.guid   = jsonObject.getString("guid");
-
         this.number = jsonObject.getInt("number");
         this.filter = jsonObject.getBoolean("filter");
 
         if(this.filter){
 
-            JSONObject obj = new JSONObject(jsonObject.getString("Объект"));
-            //this.type      = obj.getString("type");
-
-            JSONObject objJson = new JSONObject(obj.getString("objectJson"));
-
-            this.obj_json  = objJson.toString();
-            this.type      =  objJson.getString("#type");
+            this.type       = jsonObject.getString("type");
+            this.obj_json   = jsonObject.getString("objectJson");
 
         }else{
 

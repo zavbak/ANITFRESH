@@ -53,26 +53,25 @@ public class BuilderHelper {
 
 
     /**
-     * @param json
+     * @param json из без number
      * @return
      */
     public static MetaObject getObject(JSONObject json) throws JSONException {
 
 
-        JSONObject jsonObject = new JSONObject(json.getString("objectJson"));
-        TYPE_ENTITIES type = TYPE_ENTITIES.getType(jsonObject.getString("#type"));
-        JSONObject value = new JSONObject(jsonObject.getString("#value"));
-        String guid = value.getString("Ref");
+
+        TYPE_ENTITIES type    = TYPE_ENTITIES.getType(json.getString("type"));
+        String guid           = json.getString("guid");
 
 
         switch (type) {
 
             case USER:
-                return new User(guid, jsonObject);
+                return new User(guid, json);
             case CONTRACTOR:
-                return new Contractor(guid, jsonObject);
+                return new Contractor(guid, json);
             case TASK:
-                return new Task(guid, jsonObject);
+                return new Task(guid, json);
             default:
                 return null;
 

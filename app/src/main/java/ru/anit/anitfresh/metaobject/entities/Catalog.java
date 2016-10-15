@@ -14,17 +14,13 @@ public abstract class Catalog extends MetaObject {
     protected Catalog(String guid, TYPE_ENTITIES type, JSONObject jsonObject) throws JSONException {
         super(guid, type);
 
-        String VALUE_TAG       = "#value";
-        String OBJECT_JSON_TAG = "objectJson";
-
-        String DESCRIPTION_TAG = "Description";
-        String CODE_TAG        = "Code";
+        String NAME        = "name";
+        String CODE        = "code";
+        String IS_GROUP    = "is_group";
 
 
-        JSONObject valuej      = new JSONObject(jsonObject.getString(VALUE_TAG));
-
-        this.name = valuej.getString("Description");
-        this.code = valuej.getString("Code");
+        this.name = jsonObject.getString(NAME);
+        this.code = jsonObject.getString(CODE);
 
     }
 

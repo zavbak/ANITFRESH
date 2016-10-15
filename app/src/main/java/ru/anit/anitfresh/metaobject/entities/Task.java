@@ -11,6 +11,14 @@ import java.util.HashSet;
 public class Task extends Document {
 
 
+    final String TITLE              = "title";
+    final String GUID_CONTRACTOR    = "guid_contractor";
+    final String GUID_OTVETSTVENNIY = "guid_otvetstvenniy";
+    final String GUID_KONTRALER     = "guid_contraler";
+    final String DATE_OKONCHANIA    = "date_okonchania";
+    final String GUID_POSTANOVCHIC  = "guid_postanovchic";
+
+
     String title;
     String endTask;
     String guidContractor;
@@ -25,25 +33,21 @@ public class Task extends Document {
     public Task(String guid, JSONObject jsonObject) throws JSONException {
         super(guid, TYPE_ENTITIES.TASK, jsonObject);
 
-        JSONObject value = new JSONObject(jsonObject.getString("#value"));
 
-        this.title = value.getString("ОписаниеСобытия");
-        this.endTask = value.getString("ОкончаниеСобытия");
+        this.title = jsonObject.getString(TITLE);
+        this.endTask = jsonObject.getString(DATE_OKONCHANIA);
 
-        guidContractor = value.getString("Контрагент");
-        guidOtvetstvenniy = value.getString("Ответственный");
-        guidPostanovchic = value.getString("ПостановщикЗадачи");
-        guidContraler = value.getString("Контроллер");
+        guidContractor    = jsonObject.getString(GUID_CONTRACTOR);
+        guidOtvetstvenniy = jsonObject.getString(GUID_OTVETSTVENNIY);
+        guidPostanovchic  = jsonObject.getString(GUID_POSTANOVCHIC);
+        guidContraler     = jsonObject.getString(GUID_KONTRALER);
 
     }
 
 
     public JSONObject getJson() throws JSONException {
 
-        final String TITLE              = "title";
-        final String GUID_CONTRACTOR    = "guid_contractor";
-        final String GUID_OTVETSTVENNIY = "guid_otvetstvenniy";
-        final String GUID_KONTRALER     = "guid_contraler";
+
 
         JSONObject taskJ = new JSONObject();
         taskJ.put(TITLE,title);

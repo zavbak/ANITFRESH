@@ -5,7 +5,7 @@ public enum TYPE_ENTITIES {
     TASK {
         @Override
         public String getNameFromBase() {
-            return "jcfg:DocumentObject.Событие";
+            return "Документ.Событие";
         }
 
         @Override
@@ -15,7 +15,7 @@ public enum TYPE_ENTITIES {
     },CONTRACTOR {
         @Override
         public String getNameFromBase() {
-            return "jcfg:CatalogObject.Контрагенты";
+            return "Справочник.Контрагент";
         }
 
         @Override
@@ -25,7 +25,7 @@ public enum TYPE_ENTITIES {
     },USER {
         @Override
         public String getNameFromBase() {
-            return "jcfg:CatalogObject.Пользователи";
+            return "Справочник.Пользователь";
         }
 
         @Override
