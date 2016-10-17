@@ -184,7 +184,7 @@ public class CashList {
             long d1 = DataUtils.dataJsonToLong(t1.getEndTask());
             long d2 = DataUtils.dataJsonToLong(t2.getEndTask());
 
-            if (d1 < d2) {
+            if (d1 > d2) {
                 return -1;
             } else if (d1 > d2) {
                 return 1;

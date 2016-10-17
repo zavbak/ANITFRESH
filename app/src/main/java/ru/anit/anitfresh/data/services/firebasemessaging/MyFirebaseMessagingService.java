@@ -46,12 +46,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         if (data != null) {
             String command = remoteMessage.getData().get("command");
-            if (command.equalsIgnoreCase(SYNCHRONIZATION)) {
-                new InteratorPutToken().execute();
-                new InteratorSynhronizerNotNotifi().execute();
+            if(command != null){
+                if (command.equalsIgnoreCase(SYNCHRONIZATION)) {
+                    new InteratorPutToken().execute();
+                    new InteratorSynhronizerNotNotifi().execute();
+                }
             }
         }
-
 
     }
 
