@@ -5,15 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
 
 import ru.anit.anitfresh.R;
+import ru.anit.anitfresh.databus.EventBusMessageOnInform;
 import ru.anit.anitfresh.general.general.DataUtils;
 import ru.anit.anitfresh.metaobject.entities.Catalog;
 import ru.anit.anitfresh.metaobject.entities.MetaObject;
 import ru.anit.anitfresh.metaobject.entities.Task;
+import ru.anit.anitfresh.ui.dialog.dialogtask1.DialogTask;
 
 
 /**
@@ -24,7 +27,10 @@ public class AdapterTasks extends RecyclerView.Adapter<AdapterTasks.VH>{
     List<Task> list;
     HashMap<String,MetaObject> cashObjects;
 
-    public AdapterTasks() {
+    IViewFragmentTaskList mViewFragmentTaskList;
+
+    public AdapterTasks(IViewFragmentTaskList viewFragmentTaskList) {
+        this.mViewFragmentTaskList = viewFragmentTaskList;
 
     }
 
@@ -43,7 +49,6 @@ public class AdapterTasks extends RecyclerView.Adapter<AdapterTasks.VH>{
                 .inflate(R.layout.fragment_tasks_list_item, parent, false);
 
         final VH vh = new VH(v);
-
         return vh;
     }
 
@@ -58,7 +63,6 @@ public class AdapterTasks extends RecyclerView.Adapter<AdapterTasks.VH>{
         }
 
         return ((Catalog) metaObject).getName();
-
     }
 
     @Override
@@ -73,6 +77,12 @@ public class AdapterTasks extends RecyclerView.Adapter<AdapterTasks.VH>{
 
         holder.tvContractorItem_Task.setText(getCatalogText(task.getGuidContractor()));
         holder.tvOtvetstveniyItem_tasks.setText(getCatalogText(task.getGuidOtvetstvenniy()));
+
+        // открываем диалог
+        holder.itemView.setOnClickListener(view -> {
+            mViewFragmentTaskList.showDialogTask(task);
+        });
+
 
     }
 

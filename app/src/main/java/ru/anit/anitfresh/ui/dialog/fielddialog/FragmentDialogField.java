@@ -1,5 +1,6 @@
 package ru.anit.anitfresh.ui.dialog.fielddialog;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -71,6 +72,8 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_dialog_field, null, false);
 
+
+
         mRecyclerView = binding.rvList;
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -80,9 +83,13 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
 
         redraw();
 
+
+        Dialog dialog = getDialog();
+
+
         // открываем клавиатуру
         binding.edSearch.requestFocus();
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         return binding.getRoot();
 
@@ -92,6 +99,12 @@ public class FragmentDialogField extends DialogFragment implements IViewFragment
         this.mGetListDataItem = GetListDataItem;
     }
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Light_NoTitleBar_Fullscreen);
+    }
 
     /**
      * Получаем данные

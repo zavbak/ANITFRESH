@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.view.ViewGroup;
 
 import ru.anit.anitfresh.R;
 import ru.anit.anitfresh.databinding.FragmentTasksListBinding;
+import ru.anit.anitfresh.metaobject.entities.Task;
+import ru.anit.anitfresh.ui.dialog.dialogtask1.DialogTask;
+import ru.anit.anitfresh.ui.dialog.taskdialog.FragmentDialogTask;
 
 
 /**
@@ -47,13 +51,22 @@ public abstract class FragmentTasksListAbs extends Fragment implements IViewFrag
     public void showList(CashList cashList) {
 
         if(mAdapter == null){
-            mAdapter = new AdapterTasks();
+            mAdapter = new AdapterTasks(this);
         }
         mAdapter.changeData(cashList);
 
         //mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
 
+    }
+
+
+    @Override
+    public void showDialogTask(Task task) {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+
+        DialogTask dialog = DialogTask.getInstance(task);
+        dialog.show(ft, "tag_dialog_task");
     }
 
     @Override
