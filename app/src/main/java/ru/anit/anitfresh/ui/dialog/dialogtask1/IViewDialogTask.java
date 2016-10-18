@@ -5,4 +5,10 @@ package ru.anit.anitfresh.ui.dialog.dialogtask1;
  */
 
 public interface IViewDialogTask {
+    void setTitle(String text);
+    void setContractor(String text);
+    void setOtvetstvenniy(String text);
+    void setContraler(String text);
+    void setTitleTask(String text);
+    void canselDialog();
 }

@@ -65,7 +65,7 @@ public abstract class FragmentTasksListAbs extends Fragment implements IViewFrag
     public void showDialogTask(Task task) {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
 
-        DialogTask dialog = DialogTask.getInstance(task);
+        DialogTask dialog = DialogTask.getInstance(task.getGuid());
         dialog.show(ft, "tag_dialog_task");
     }
 

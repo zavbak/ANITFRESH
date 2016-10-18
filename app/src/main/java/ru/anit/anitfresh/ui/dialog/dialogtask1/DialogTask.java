@@ -19,42 +19,55 @@ import ru.anit.anitfresh.metaobject.entities.Task;
  * Created by 79900 on 18.10.2016.
  */
 
-public class DialogTask extends DialogFragment implements IViewDialogTask {
+public class DialogTask extends DialogFragment implements IViewDialogTask, View.OnClickListener {
 
 
     IPresenterDialogTask presenter;
     DialogTask1Binding binding;
 
+
     /**
-     * instance dialog
      *
-     * @param task
+     * @param guid
      * @return
      */
-    public static DialogTask getInstance(Task task) {
+    public static DialogTask getInstance(String guid) {
         DialogTask dialog = new DialogTask();
-        dialog.setPresenter(new PresenterDialogTask(task, dialog));
+        dialog.setPresenter(new PresenterDialogTask(dialog));
         return dialog;
     }
+
+
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_task1, null, false);
-
-        binding.tvTitle.setText("Задача № 5487 от 04.09.1976");
-
+        binding.tvCancel.setOnClickListener(this);
+        binding.tvOk.setOnClickListener(this);
         return binding.getRoot();
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+        presenter.onStart();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.onStop();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // НАДО СОХРАНЯТЬСЯ ????????????????????????????
         setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Light_NoTitleBar_Fullscreen);
 
     }
@@ -67,4 +80,56 @@ public class DialogTask extends DialogFragment implements IViewDialogTask {
         this.presenter = presenter;
     }
 
+    @Override
+    public void setTitle(String text) {
+        binding.tvTitle.setText(text);
+    }
+
+    @Override
+    public void setContractor(String text) {
+        binding.etContractor.setText(text);
+    }
+
+    @Override
+    public void setOtvetstvenniy(String text) {
+        binding.etOtvetstvenniy.setText(text);
+    }
+
+    @Override
+    public void setContraler(String text) {
+       binding.etContraler.setText(text);
+    }
+
+    @Override
+    public void setTitleTask(String text) {
+        binding.etTitleTask.setText(text);
+    }
+
+    @Override
+    public void canselDialog() {
+        getDialog().cancel();
+        //dismiss();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+
+            case R.id.tvOk:
+
+                canselDialog();
+
+                break;
+
+            case R.id.tvCancel:
+
+
+                canselDialog();
+                break;
+            default:
+                break;
+
+
+        }
+    }
 }
